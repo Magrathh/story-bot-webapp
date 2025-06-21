@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор сценария</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Сценарии</h1>
+            <p>Выберите историю, чтобы начать</p>
+        </div>
+
+        <div class="game-list">
+
+            <div class="game-card">
+                <div class="card-header">
+                    <h3>Зов Глубин</h3>
+                    <span class="rating">⭐️ 4.8</span>
+                </div>
+                <p class="description">
+                    Вы — океанолог на борту исследовательской подлодки, но странный сигнал с глубин меняет всё...
+                </p>
+                <button class="select-button" data-game-id="deep_call_1">Выбрать</button>
+            </div>
+
+            <div class="game-card">
+                <div class="card-header">
+                    <h3>Последний Сигнал</h3>
+                    <span class="rating">⭐️ 4.6</span>
+                </div>
+                <p class="description">
+                    Колония на Марсе перестала выходить на связь. Вы — член спасательной миссии. Что вас ждет на красной планете?
+                </p>
+                <button class="select-button" data-game-id="last_signal_2">Выбрать</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
