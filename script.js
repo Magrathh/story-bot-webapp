@@ -1,31 +1,42 @@
-// Ждем, пока вся страница загрузится
+// Файл: webapp/script.js
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Получаем объект WebApp из глобального объекта window
-    const tg = window.Telegram.WebApp;
+    console.log("Страница загружена. Начинаю выполнение скрипта.");
 
-    // Сообщаем Telegram, что приложение готово к отображению
-    tg.ready();
+    try {
+        const tg = window.Telegram.WebApp;
+        console.log("Объект Telegram WebApp успешно получен.", tg);
+        tg.ready();
+    } catch (e) {
+        console.error("Не удалось получить объект Telegram WebApp. Это нормально, если вы открыли страницу не в Telegram.", e);
+    }
 
-    // Находим все кнопки с классом 'select-button'
     const buttons = document.querySelectorAll('.select-button');
+    console.log(`Найдено кнопок 'Выбрать': ${buttons.length}`);
 
-    // Для каждой кнопки добавляем обработчик клика
     buttons.forEach(button => {
         button.addEventListener('click', function() {
-            // При клике получаем ID игры из атрибута data-game-id
-            const gameId = this.getAttribute('data-game-id');
+            console.log("Кнопка нажата!"); // <-- Проверяем, срабатывает ли клик
 
-            // Формируем объект с данными для отправки боту
+            const gameId = this.getAttribute('data-game-id');
+            console.log(`Получен gameId: ${gameId}`);
+
             const dataToSend = {
-                type: 'game_selection', // Указываем тип действия
+                type: 'game_selection',
                 game_id: gameId
             };
+            console.log("Данные для отправки:", dataToSend);
 
-            // Отправляем данные боту в виде JSON-строки
-            tg.sendData(JSON.stringify(dataToSend));
-
-            // После отправки данных можно закрыть Web App
-            // tg.close(); // Раскомментируйте, если хотите, чтобы окно закрывалось сразу
+            try {
+                // Пытаемся отправить данные. В браузере это вызовет ошибку, но это нормально.
+                const tg = window.Telegram.WebApp;
+                tg.sendData(JSON.stringify(dataToSend));
+                console.log("Данные успешно отправлены через tg.sendData.");
+            } catch(e) {
+                console.error("Ошибка при отправке данных через tg.sendData. Это ожидаемо в обычном браузере.", e);
+                // Для отладки вне Telegram, можно показать alert
+                alert(`Отладка: попытка отправить game_id: ${gameId}`);
+            }
         });
     });
 });
